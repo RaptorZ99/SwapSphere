@@ -1,4 +1,4 @@
-# Database Rules (PostgreSQL + Prisma v7)
+# Database rules (PostgreSQL + Prisma v7)
 
 ## Decision projet (Prisma v7)
 - Prisma v7 est utilise avec le nouveau generator `prisma-client`.

@@ -1,0 +1,107 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+model User {
+  id          String         @id @default(uuid())
+  displayName String
+  avatarUrl   String?
+  createdAt   DateTime       @default(now())
+
+  items       Item[]
+  proposed    Trade[]        @relation("TradeProposer")
+  received    Trade[]        @relation("TradeRecipient")
+  messages    TradeMessage[]
+}
+
+model Item {
+  id          String       @id @default(uuid())
+  title       String       @db.VarChar(120)
+  description String
+  category    ItemCategory
+  imageUrl    String
+  ownerId     String
+  createdAt   DateTime     @default(now())
+
+  owner      User        @relation(fields: [ownerId], references: [id], onDelete: Restrict)
+  tradeItems TradeItem[]
+
+  @@index([ownerId])
+  @@index([category])
+}
+
+model Trade {
+  id          String       @id @default(uuid())
+  proposerId  String
+  recipientId String
+  status      TradeStatus  @default(PENDING)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  proposer   User           @relation("TradeProposer", fields: [proposerId], references: [id], onDelete: Restrict)
+  recipient  User           @relation("TradeRecipient", fields: [recipientId], references: [id], onDelete: Restrict)
+  tradeItems TradeItem[]
+  messages   TradeMessage[]
+
+  @@index([proposerId])
+  @@index([recipientId])
+  @@index([status])
+}
+
+model TradeItem {
+  id      String    @id @default(uuid())
+  tradeId String
+  itemId  String
+  side    TradeSide
+
+  trade Trade @relation(fields: [tradeId], references: [id], onDelete: Cascade)
+  item  Item  @relation(fields: [itemId], references: [id], onDelete: Restrict)
+
+  @@index([tradeId])
+  @@index([itemId])
+  @@unique([tradeId, itemId])
+}
+
+model TradeMessage {
+  id          String           @id @default(uuid())
+  tradeId     String
+  authorId    String
+  messageType TradeMessageType
+  body        String
+  createdAt   DateTime         @default(now())
+
+  trade  Trade @relation(fields: [tradeId], references: [id], onDelete: Cascade)
+  author User  @relation(fields: [authorId], references: [id], onDelete: Restrict)
+
+  @@index([tradeId, createdAt])
+}
+
+enum ItemCategory {
+  CARD
+  ACCESSORY
+  DIGITAL
+}
+
+enum TradeStatus {
+  PENDING
+  NEGOTIATION
+  ACCEPTED
+  REJECTED
+  CANCELED
+}
+
+enum TradeSide {
+  PROPOSER
+  RECIPIENT
+}
+
+enum TradeMessageType {
+  PROPOSAL
+  COMMENT
+  SYSTEM
+}

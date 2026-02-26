@@ -1,0 +1,9 @@
+{
+  "extends": "@swapsphere/config-typescript/node.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts", "prisma.config.ts", "prisma/seed.ts"]
+}

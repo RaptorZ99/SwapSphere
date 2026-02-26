@@ -1,4 +1,4 @@
-# Backend Rules (Node + Express 5)
+# Backend rules (Node + Express 5)
 
 ## Principes issus de la doc Express 5
 - Le handler d'erreur final doit avoir 4 arguments: `(err, req, res, next)`.

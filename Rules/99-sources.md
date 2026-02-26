@@ -1,7 +1,7 @@
 # Sources and References
 
 ## Principe
-Les regles de `Rules/` sont une synthese operationnelle de ces sources officielles.
+Les regles de `rules/` sont une synthese operationnelle de ces sources officielles.
 L'agent peut implementer sans navigation externe si ces regles couvrent le besoin.
 
 ## Documentation officielle utilisee

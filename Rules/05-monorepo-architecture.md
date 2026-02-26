@@ -20,7 +20,7 @@ packages/
   shared-utils/
 infra/
   docker/
-Rules/
+rules/
 docs/
   specs/
 ```

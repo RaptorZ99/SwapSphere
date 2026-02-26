@@ -11,7 +11,7 @@ Aucune implementation sans spec validee.
 5. Implementer une tranche verticale minimale.
 6. Executer lint/check-types/build.
 7. Valider les parcours fonctionnels critiques.
-8. Mettre a jour la doc impactee dans `Rules/`.
+8. Mettre a jour la doc impactee dans `rules/`.
 
 ## Format de spec attendu
 - Contexte

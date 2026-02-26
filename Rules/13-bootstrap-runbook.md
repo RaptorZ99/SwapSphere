@@ -40,7 +40,7 @@ pnpm --filter ./apps/api add -D typescript tsx prisma @types/express @types/node
 ```bash
 pnpm --filter ./apps/api prisma init
 ```
-Puis adapter `schema.prisma` et `prisma.config.ts` selon `Rules/08-database-prisma-postgres.md`.
+Puis adapter `schema.prisma` et `prisma.config.ts` selon `rules/08-database-prisma-postgres.md`.
 
 ## 6.1) URL base locale PostgreSQL
 Si Prisma CLI tourne sur la machine hote, utiliser:
@@ -81,7 +81,7 @@ Creer:
 - `infra/docker/web.Dockerfile`
 - `docker-compose.yml`
 
-Suivre blueprint dans `Rules/11-docker-devx.md`.
+Suivre blueprint dans `rules/11-docker-devx.md`.
 
 ## 10) Gate de fin setup
 Le setup est valide si:

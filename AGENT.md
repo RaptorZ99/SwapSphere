@@ -7,14 +7,14 @@ Livrer un MVP de troc sans flux monetaire, conforme au besoin pedagogique, avec 
 
 ## 2. Source de verite
 Lire et appliquer dans cet ordre:
-1. [Rules/00-index.md](/Users/Workingplace/Desktop/MVP_Test/Rules/00-index.md)
-2. Tous les fichiers `Rules/0*.md` et `Rules/1*.md` pertinents
-3. [Rules/99-sources.md](/Users/Workingplace/Desktop/MVP_Test/Rules/99-sources.md)
+1. [rules/00-index.md](./rules/00-index.md)
+2. Tous les fichiers `rules/0*.md` et `rules/1*.md` pertinents
+3. [rules/99-sources.md](./rules/99-sources.md)
 
 Regle cle:
-- Les fichiers `Rules/` sont autosuffisants pour implementer.
+- Les fichiers `rules/` sont autosuffisants pour implementer.
 - L'agent n'a pas a aller chercher la doc externe pendant l'implementation standard.
-- Si un besoin depasse `Rules/`, proposer d'abord une mise a jour de regle puis implementer.
+- Si un besoin depasse `rules/`, proposer d'abord une mise a jour de regle puis implementer.
 
 ## 3. Processus obligatoire par tache
 1. Reformuler la user story cible.
@@ -23,7 +23,7 @@ Regle cle:
 4. Verifier les impacts fonctionnels attendus avant implementation complete.
 5. Implementer en petite tranche verticale.
 6. Executer quality gates (`lint`, `check-types`, `build`).
-7. Mettre a jour la doc impactee dans `Rules/` si contrat modifie.
+7. Mettre a jour la doc impactee dans `rules/` si contrat modifie.
 
 ## 4. Regles metier non negociables
 - Aucun paiement, aucun prix, aucune monnaie.
@@ -39,7 +39,7 @@ Regle cle:
 - Dockerisable localement via compose.
 
 ## 6. Politique versions
-- Respecter `Rules/06-stack-versions.md`.
+- Respecter `rules/06-stack-versions.md`.
 - Avant ajout/upgrade de dep, verifier la compatibilite Node et alignement Prisma.
 
 ## 7. Prompt engineering operationnel

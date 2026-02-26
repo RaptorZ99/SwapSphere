@@ -1,4 +1,4 @@
-# Frontend Rules (React 19 + Vite + Tailwind v4)
+# Frontend rules (React 19 + Vite + Tailwind v4)
 
 ## Principes React retenus de la doc
 - Le state React est un snapshot: ne pas supposer une mutation immediate apres setState.
