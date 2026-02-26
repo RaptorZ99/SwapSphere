@@ -54,7 +54,7 @@ export const UserItemsPage = () => {
   }, [selectedUser, userId, category]);
 
   const categoryButtons = useMemo(
-    () => ["ALL", ItemCategory.CARD, ItemCategory.ACCESSORY, ItemCategory.DIGITAL] as const,
+    () => ["ALL", ItemCategory.CARD, ItemCategory.ACCESSORY, ItemCategory.PACK] as const,
     []
   );
 

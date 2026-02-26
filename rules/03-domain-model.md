@@ -12,7 +12,7 @@
 - `id` (uuid)
 - `title` (string, max 120)
 - `description` (text)
-- `category` (enum: CARD, ACCESSORY, DIGITAL)
+- `category` (enum: CARD, ACCESSORY, PACK)
 - `imageUrl` (string)
 - `ownerId` (fk -> User)
 - `createdAt`

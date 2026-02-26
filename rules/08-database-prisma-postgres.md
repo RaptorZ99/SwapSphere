@@ -146,7 +146,7 @@ model TradeMessage {
 enum ItemCategory {
   CARD
   ACCESSORY
-  DIGITAL
+  PACK
 }
 
 enum TradeStatus {

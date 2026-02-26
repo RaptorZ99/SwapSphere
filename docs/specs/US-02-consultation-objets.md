@@ -24,7 +24,7 @@ En tant que `User`, je veux `consulter mes objets et ceux d'un autre utilisateur
   - `GET /api/v1/items/me`
   - `GET /api/v1/users/:userId/items`
 - Requete(s)
-  - Query optionnelle: `?category=CARD|ACCESSORY|DIGITAL`
+  - Query optionnelle: `?category=CARD|ACCESSORY|PACK`
 - Reponse(s)
   - `{ "data": [{ "id": "uuid", "title": "...", "description": "...", "category": "CARD", "imageUrl": "...", "ownerId": "uuid" }] }`
 - Erreurs

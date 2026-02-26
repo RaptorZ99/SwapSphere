@@ -267,7 +267,7 @@ Entites principales:
 - `TradeMessage` (proposition/commentaire/systeme)
 
 Enums:
-- `ItemCategory`: `CARD | ACCESSORY | DIGITAL`
+- `ItemCategory`: `CARD | ACCESSORY | PACK`
 - `TradeStatus`: `PENDING | NEGOTIATION | ACCEPTED | REJECTED | CANCELED`
 - `TradeSide`: `PROPOSER | RECIPIENT`
 - `TradeMessageType`: `PROPOSAL | COMMENT | SYSTEM`

@@ -54,9 +54,9 @@ const items = [
   {
     id: "10000000-0000-4000-8000-000000000004",
     ownerId: users[1].id,
-    title: "Booster Box virtuelle",
-    description: "Code digital collection vintage.",
-    category: ItemCategory.DIGITAL,
+    title: "Booster Box",
+    description: "Booster de cartes.",
+    category: ItemCategory.PACK,
     imageUrl: "https://images.unsplash.com/photo-1666302937150-44f5af2ab474?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHw2MHx8cG9rZW1vbnxlbnwwfDB8fHwxNzcyMDI2NDQ0fDA&ixlib=rb-4.1.0&q=80&w=1080"
   },
   {

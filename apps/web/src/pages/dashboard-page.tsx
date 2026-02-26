@@ -12,7 +12,7 @@ const categoryOptions: Array<{ label: string; value: ItemCategory | "ALL" }> = [
   { label: "Tous", value: "ALL" },
   { label: "Cards", value: ItemCategory.CARD },
   { label: "Accessoires", value: ItemCategory.ACCESSORY },
-  { label: "Digital", value: ItemCategory.DIGITAL }
+  { label: "Packs", value: ItemCategory.PACK }
 ];
 
 export const DashboardPage = () => {

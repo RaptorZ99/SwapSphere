@@ -12,7 +12,7 @@
 export const ItemCategory = {
   CARD: 'CARD',
   ACCESSORY: 'ACCESSORY',
-  DIGITAL: 'DIGITAL'
+  PACK: 'PACK'
 } as const
 
 export type ItemCategory = (typeof ItemCategory)[keyof typeof ItemCategory]
