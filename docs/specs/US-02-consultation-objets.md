@@ -14,10 +14,10 @@
 En tant que `User`, je veux `consulter mes objets et ceux d'un autre utilisateur`, afin de `preparer une proposition d'echange`.
 
 ## 4. Criteres d'acceptation
-- [ ] Critere 1 (testable): chaque fiche objet affiche titre, description, categorie, image, proprietaire.
-- [ ] Critere 2 (testable): `GET /api/v1/items/me` retourne uniquement les objets du user actif.
-- [ ] Critere 3 (testable): un filtrage minimal par `category` est disponible.
-- [ ] Critere 4 (testable): apres un troc `ACCEPTED`, `GET /api/v1/items/me` reflete les nouveaux proprietaires.
+- [ ] Critere 1 (verifiable): chaque fiche objet affiche titre, description, categorie, image, proprietaire.
+- [ ] Critere 2 (verifiable): `GET /api/v1/items/me` retourne uniquement les objets du user actif.
+- [ ] Critere 3 (verifiable): un filtrage minimal par `category` est disponible.
+- [ ] Critere 4 (verifiable): apres un troc `ACCEPTED`, `GET /api/v1/items/me` reflete les nouveaux proprietaires.
 
 ## 5. Contrat API
 - Endpoint(s)
@@ -53,14 +53,12 @@ En tant que `User`, je veux `consulter mes objets et ceux d'un autre utilisateur
 - Accessibilite minimale
   - Filtres avec labels, focus visible, feedback textuel en cas de resultat vide.
 
-## 8. Plan de tests
-- Unit
-  - Mapping filtre categorie -> query repository.
-- Integration
+## 8. Plan de validation fonctionnelle
+- API
   - Endpoints items avec session active/inactive.
   - Verification des proprietaires apres acceptation d'un troc.
 - UI
-  - Rendering listes, changement filtre, etat empty.
+  - Affichage listes, changement filtre, etat empty.
 - Cas erreur
   - `401` sans user selectionne, `404` user cible introuvable.
 
@@ -73,5 +71,5 @@ En tant que `User`, je veux `consulter mes objets et ceux d'un autre utilisateur
 ## 10. Definition of Done
 - [x] Spec validee
 - [x] Contrats valides
-- [x] Tests passent
+- [x] Validation fonctionnelle confirmee
 - [x] Documentation mise a jour

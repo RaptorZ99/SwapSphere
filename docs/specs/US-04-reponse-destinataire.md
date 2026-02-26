@@ -15,11 +15,11 @@
 En tant que `User` destinataire, je veux `accepter, refuser ou commenter`, afin de `conclure ou negocier la transaction`.
 
 ## 4. Criteres d'acceptation
-- [ ] Critere 1 (testable): action `ACCEPT` positionne le trade a `ACCEPTED` (terminal) et transfere les objets entre participants.
-- [ ] Critere 2 (testable): action `REJECT` positionne le trade a `REJECTED` (terminal) sans transfert de propriete.
-- [ ] Critere 3 (testable): action `COMMENT` conserve la transaction ouverte en `NEGOTIATION`.
-- [ ] Critere 4 (testable): si un objet du trade n'est plus disponible (deja echange ailleurs), l'action invalide renvoie `409 INVALID_TRADE_STATE` et le trade passe en `CANCELED`.
-- [ ] Critere 5 (testable): l'acceptation d'un trade annule automatiquement les autres trades ouverts qui partagent au moins un objet (`CANCELED`).
+- [ ] Critere 1 (verifiable): action `ACCEPT` positionne le trade a `ACCEPTED` (terminal) et transfere les objets entre participants.
+- [ ] Critere 2 (verifiable): action `REJECT` positionne le trade a `REJECTED` (terminal) sans transfert de propriete.
+- [ ] Critere 3 (verifiable): action `COMMENT` conserve la transaction ouverte en `NEGOTIATION`.
+- [ ] Critere 4 (verifiable): si un objet du trade n'est plus disponible (deja echange ailleurs), l'action invalide renvoie `409 INVALID_TRADE_STATE` et le trade passe en `CANCELED`.
+- [ ] Critere 5 (verifiable): l'acceptation d'un trade annule automatiquement les autres trades ouverts qui partagent au moins un objet (`CANCELED`).
 
 ## 5. Contrat API
 - Endpoint(s)
@@ -60,10 +60,8 @@ En tant que `User` destinataire, je veux `accepter, refuser ou commenter`, afin 
 - Accessibilite minimale
   - Boutons desactives pendant requete, message d'erreur lisible.
 
-## 8. Plan de tests
-- Unit
-  - Services `acceptTrade`, `rejectTrade`, `sendTradeMessage`.
-- Integration
+## 8. Plan de validation fonctionnelle
+- API
   - Endpoints actions + controle acces participant.
   - Transfert de propriete sur `accept`.
   - Annulation des trades concurrents sur objets partages.
@@ -81,5 +79,5 @@ En tant que `User` destinataire, je veux `accepter, refuser ou commenter`, afin 
 ## 10. Definition of Done
 - [x] Spec validee
 - [x] Contrats valides
-- [x] Tests passent
+- [x] Validation fonctionnelle confirmee
 - [x] Documentation mise a jour

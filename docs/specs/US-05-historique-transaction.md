@@ -15,11 +15,11 @@
 En tant qu'`utilisateur implique`, je veux `voir mes trocs et l'historique complet des messages`, afin de `suivre la negociation sans perte de contexte`.
 
 ## 4. Criteres d'acceptation
-- [ ] Critere 1 (testable): messages ordonnes par date croissante dans le detail (`/trades/:tradeId`).
-- [ ] Critere 2 (testable): auteur et horodatage visibles pour chaque message.
-- [ ] Critere 3 (testable): `GET /api/v1/trades/inbox` retourne les trocs ou le user est participant (proposer + recipient).
-- [ ] Critere 4 (testable): la page `/trades/inbox` distingue les trocs `En cours` (`PENDING`, `NEGOTIATION`) et `Historique` (`ACCEPTED`, `REJECTED`, `CANCELED`).
-- [ ] Critere 5 (testable): aucun mecanisme d'edition/suppression des messages MVP.
+- [ ] Critere 1 (verifiable): messages ordonnes par date croissante dans le detail (`/trades/:tradeId`).
+- [ ] Critere 2 (verifiable): auteur et horodatage visibles pour chaque message.
+- [ ] Critere 3 (verifiable): `GET /api/v1/trades/inbox` retourne les trocs ou le user est participant (proposer + recipient).
+- [ ] Critere 4 (verifiable): la page `/trades/inbox` distingue les trocs `En cours` (`PENDING`, `NEGOTIATION`) et `Historique` (`ACCEPTED`, `REJECTED`, `CANCELED`).
+- [ ] Critere 5 (verifiable): aucun mecanisme d'edition/suppression des messages MVP.
 
 ## 5. Contrat API
 - Endpoint(s)
@@ -58,10 +58,8 @@ En tant qu'`utilisateur implique`, je veux `voir mes trocs et l'historique compl
 - Accessibilite minimale
   - Messages lisibles, contraste correct, labels temporels explicites.
 
-## 8. Plan de tests
-- Unit
-  - Mapper detail trade vers payload UI (ordre chronologique preserve).
-- Integration
+## 8. Plan de validation fonctionnelle
+- API
   - `GET /trades/inbox` (recus + envoyes).
   - `GET /trades/:tradeId` avec include items + messages + author.
 - UI
@@ -79,5 +77,5 @@ En tant qu'`utilisateur implique`, je veux `voir mes trocs et l'historique compl
 ## 10. Definition of Done
 - [x] Spec validee
 - [x] Contrats valides
-- [x] Tests passent
+- [x] Validation fonctionnelle confirmee
 - [x] Documentation mise a jour

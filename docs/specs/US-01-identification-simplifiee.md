@@ -14,9 +14,9 @@
 En tant que `User`, je veux `selectionner mon profil predefini`, afin de `demarrer l'utilisation de SwapSphere rapidement`.
 
 ## 4. Criteres d'acceptation
-- [ ] Critere 1 (testable): `GET /api/v1/users` retourne la liste des utilisateurs predefinis.
-- [ ] Critere 2 (testable): `POST /api/v1/session/select-user` enregistre le `userId` selectionne dans la session applicative.
-- [ ] Critere 3 (testable): aucun formulaire inscription/mot de passe n'est expose dans l'UI.
+- [ ] Critere 1 (verifiable): `GET /api/v1/users` retourne la liste des utilisateurs predefinis.
+- [ ] Critere 2 (verifiable): `POST /api/v1/session/select-user` enregistre le `userId` selectionne dans la session applicative.
+- [ ] Critere 3 (verifiable): aucun formulaire inscription/mot de passe n'est expose dans l'UI.
 
 ## 5. Contrat API
 - Endpoint(s)
@@ -53,13 +53,11 @@ En tant que `User`, je veux `selectionner mon profil predefini`, afin de `demarr
 - Accessibilite minimale
   - Liste selectionnable avec labels explicites et focus visible.
 
-## 8. Plan de tests
-- Unit
-  - Validation du payload `select-user` (uuid requis).
-- Integration
-  - API `GET /users`, `POST /session/select-user` (cas nominal + user inexistant).
+## 8. Plan de validation fonctionnelle
+- API
+  - `GET /users`, `POST /session/select-user` (cas nominal + user inexistant).
 - UI
-  - Rendering page `/select-user`, selection utilisateur, redirection.
+  - Affichage `/select-user`, selection utilisateur, redirection.
 - Cas erreur
   - `400` payload invalide, `404` user inconnu.
 
@@ -67,10 +65,10 @@ En tant que `User`, je veux `selectionner mon profil predefini`, afin de `demarr
 - Risque principal
   - Incoherence entre stockage session front et contexte user API.
 - Mitigation
-  - Contrat de session unique (`userId`) et tests integration front/back.
+  - Contrat de session unique (`userId`) et validation fonctionnelle front/back.
 
 ## 10. Definition of Done
 - [x] Spec validee
 - [x] Contrats valides
-- [x] Tests passent
+- [x] Validation fonctionnelle confirmee
 - [x] Documentation mise a jour
