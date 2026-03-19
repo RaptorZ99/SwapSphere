@@ -55,10 +55,7 @@ apps/
   api/                    # Express 5 + Prisma + Zod
   web/                    # React 19 + Vite 7 + Tailwind 4
 packages/
-  config-eslint/          # Config ESLint partagee
-  config-typescript/      # Config TS partagee
-  shared-types/           # Contrats types front/back
-  shared-utils/           # Utilitaires purs partages
+  shared/                 # Types partages + utilitaires purs (front/back)
 infra/
   docker/                 # Dockerfiles dev
 rules/                    # Source de verite implementation
@@ -66,10 +63,13 @@ docs/
   specs/                  # Specs US-01..US-05
 ```
 
+Fichiers racine notables:
+- `eslint.config.mjs` — config ESLint centralisee (flat config ESLint 10)
+- `tsconfig.base.json` / `tsconfig.node.json` / `tsconfig.react.json` — configs TypeScript centralisees
+
 Principes de frontiere:
 - `apps/web` ne depend pas de `apps/api`.
-- Les contrats passent par `packages/shared-types`.
-- Les utilitaires metier transverses passent par `packages/shared-utils`.
+- Les contrats types et utilitaires metier transverses passent par `packages/shared`.
 
 ## 5. Stack technique et versions cibles
 Versions alignees avec `rules/06-stack-versions.md`:

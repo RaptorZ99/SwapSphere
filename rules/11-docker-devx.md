@@ -44,7 +44,8 @@ services:
       context: .
       dockerfile: infra/docker/web.Dockerfile
     environment:
-      VITE_API_BASE_URL: http://localhost:3000/api/v1
+      VITE_API_BASE_URL: /api/v1
+      VITE_API_PROXY_TARGET: http://api:3000
     ports:
       - "5173:5173"
     depends_on:

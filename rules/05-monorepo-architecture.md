@@ -14,10 +14,7 @@ apps/
   api/
   web/
 packages/
-  config-eslint/
-  config-typescript/
-  shared-types/
-  shared-utils/
+  shared/                 # Types partages + utilitaires purs
 infra/
   docker/
 rules/
@@ -30,7 +27,9 @@ docs/
 - `turbo.json`
 - `package.json`
 - `tsconfig.base.json`
-- `.editorconfig`
+- `tsconfig.node.json` — extends base, ajoute lib Node
+- `tsconfig.react.json` — extends base, ajoute lib DOM + JSX
+- `eslint.config.mjs` — config ESLint centralisee (flat config ESLint 10)
 - `.gitignore`
 - `.env.example`
 
@@ -104,16 +103,12 @@ Template recommande:
 ## Conventions de nommage packages
 - `@swapsphere/api`
 - `@swapsphere/web`
-- `@swapsphere/shared-types`
-- `@swapsphere/shared-utils`
-- `@swapsphere/config-eslint`
-- `@swapsphere/config-typescript`
+- `@swapsphere/shared`
 
 ## Frontieres de dependances
 - `apps/web` ne depend pas de `apps/api`.
-- Les types partages passent par `packages/shared-types`.
-- Les utilitaires purs passent par `packages/shared-utils`.
-- Les configs outillage passent par `packages/config-*`.
+- Les types partages et utilitaires purs passent par `packages/shared`.
+- Les configs ESLint et TypeScript sont centralisees a la racine du monorepo (pas de packages `config-*` dedies).
 
 ## Anti-patterns interdits
 - Copier/coller des types API entre front et back.

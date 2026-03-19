@@ -19,7 +19,7 @@ packages:
 
 ## 3) Creer structure dossiers
 ```bash
-mkdir -p apps/api apps/web packages/shared-types packages/shared-utils packages/config-eslint packages/config-typescript infra/docker docs/specs
+mkdir -p apps/api apps/web packages/shared infra/docker docs/specs
 ```
 
 ## 4) Initialiser app web (Vite React TS)
