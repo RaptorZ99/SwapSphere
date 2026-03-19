@@ -314,7 +314,7 @@ pnpm --filter @swapsphere/api prisma:seed
 
 ## 15. Documentation interne
 Source de verite implementation:
-- `AGENT.md`
+- `CLAUDE.md`
 - `rules/00-index.md` (ordre de lecture)
 - `rules/01..13` (scope, architecture, stack, API, DB, frontend, quality gates)
 - `docs/specs/US-01-identification-simplifiee.md`

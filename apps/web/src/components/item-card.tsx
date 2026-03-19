@@ -9,28 +9,55 @@ type ItemCardProps = {
 
 export const ItemCard = ({ item, selectable = false, selected = false, onToggle }: ItemCardProps) => {
   return (
-    <article
-      className={`overflow-hidden rounded-2xl border bg-white shadow-sm transition ${
-        selected ? "border-[var(--color-brand-500)] ring-2 ring-[var(--color-brand-200)]" : "border-black/10"
-      }`}
-    >
-      <img src={item.imageUrl} alt={item.title} className="h-36 w-full object-cover" loading="lazy" />
+    <article className={`nm-card ${selected ? "nm-card-selected" : ""}`}>
+      {/* Image */}
+      <div className="relative h-36 overflow-hidden">
+        <img
+          src={item.imageUrl}
+          alt={item.title}
+          className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+          loading="lazy"
+        />
+        {/* Category pill floating on image */}
+        <span
+          className="absolute right-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider"
+          style={{
+            background: "var(--nm-bg)",
+            color: "var(--nm-text-secondary)",
+            boxShadow: "var(--nm-raised-sm)"
+          }}
+        >
+          {item.category}
+        </span>
+      </div>
+
+      {/* Content */}
       <div className="space-y-2 p-4">
-        <h3 className="line-clamp-1 text-base font-semibold">{item.title}</h3>
-        <p className="line-clamp-2 text-sm text-black/70">{item.description}</p>
-        <div className="flex items-center justify-between text-xs text-black/60">
-          <span className="rounded-full bg-black/5 px-2 py-1 font-semibold">{item.category}</span>
+        <h3 className="heading-section line-clamp-1 text-[0.95rem]">{item.title}</h3>
+        <p className="line-clamp-2 text-xs leading-relaxed" style={{ color: "var(--nm-text-secondary)" }}>
+          {item.description}
+        </p>
+
+        <div className="flex items-center gap-2 text-[11px]" style={{ color: "var(--nm-text-tertiary)" }}>
+          <span
+            className="flex h-5 w-5 items-center justify-center rounded-full text-[8px] font-bold"
+            style={{
+              background: "var(--nm-accent-soft)",
+              color: "var(--nm-accent)"
+            }}
+          >
+            {item.ownerDisplayName.slice(0, 1).toUpperCase()}
+          </span>
           <span>{item.ownerDisplayName}</span>
         </div>
+
         {selectable ? (
           <button
             type="button"
             onClick={onToggle}
-            className={`mt-2 w-full rounded-full px-3 py-2 text-sm font-semibold transition ${
-              selected ? "bg-black text-white" : "bg-black/5 text-black hover:bg-black/10"
-            }`}
+            className={`nm-btn mt-1 w-full py-2 text-xs ${selected ? "nm-btn-accent" : ""}`}
           >
-            {selected ? "Selectionne" : "Selectionner"}
+            {selected ? "Selectionne ✓" : "Selectionner"}
           </button>
         ) : null}
       </div>

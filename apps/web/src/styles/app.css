@@ -1,29 +1,346 @@
 @import "tailwindcss";
 @import "./theme.css";
 
+/* ══════════════════════════════════════════
+   NEUMORPHIC DESIGN TOKENS — Light / Dark
+   ──────────────────────────────────────────
+   Rule: element bg == parent bg. Always.
+   ══════════════════════════════════════════ */
+
 :root {
-  font-family: var(--font-sans);
-  color: var(--color-ink-900);
+  --nm-bg: #e0e5ec;
+  --nm-shadow-dark: #b8bec7;
+  --nm-shadow-light: #ffffff;
+
+  --nm-text: #2d3748;
+  --nm-text-secondary: #5a6577;
+  --nm-text-tertiary: #8e99a9;
+
+  --nm-accent: #0891b2;
+  --nm-accent-hover: #0e7490;
+  --nm-accent-soft: rgba(8, 145, 178, 0.12);
+
+  --nm-success: #059669;
+  --nm-success-soft: rgba(5, 150, 105, 0.12);
+
+  --nm-danger: #dc2626;
+  --nm-danger-soft: rgba(220, 38, 38, 0.12);
+
+  --nm-warning: #d97706;
+  --nm-warning-soft: rgba(217, 119, 6, 0.12);
+
+  --nm-info: #2563eb;
+  --nm-info-soft: rgba(37, 99, 235, 0.12);
+
+  --nm-muted: #94a3b8;
+
+  /* Pre-composed shadows */
+  --nm-raised-sm: 3px 3px 6px var(--nm-shadow-dark), -3px -3px 6px var(--nm-shadow-light);
+  --nm-raised: 6px 6px 12px var(--nm-shadow-dark), -6px -6px 12px var(--nm-shadow-light);
+  --nm-raised-lg: 10px 10px 20px var(--nm-shadow-dark), -10px -10px 20px var(--nm-shadow-light);
+  --nm-pressed: inset 3px 3px 6px var(--nm-shadow-dark), inset -3px -3px 6px var(--nm-shadow-light);
+  --nm-pressed-lg: inset 5px 5px 10px var(--nm-shadow-dark), inset -5px -5px 10px var(--nm-shadow-light);
+  --nm-flat: 2px 2px 5px var(--nm-shadow-dark), -2px -2px 5px var(--nm-shadow-light);
 }
 
-* {
-  box-sizing: border-box;
+.dark {
+  --nm-bg: #2d3436;
+  --nm-shadow-dark: #232829;
+  --nm-shadow-light: #374043;
+
+  --nm-text: #e2e8f0;
+  --nm-text-secondary: #94a3b8;
+  --nm-text-tertiary: #64748b;
+
+  --nm-accent: #22d3ee;
+  --nm-accent-hover: #06b6d4;
+  --nm-accent-soft: rgba(34, 211, 238, 0.12);
+
+  --nm-success: #34d399;
+  --nm-success-soft: rgba(52, 211, 153, 0.12);
+
+  --nm-danger: #fb7185;
+  --nm-danger-soft: rgba(251, 113, 133, 0.12);
+
+  --nm-warning: #fbbf24;
+  --nm-warning-soft: rgba(251, 191, 36, 0.12);
+
+  --nm-info: #60a5fa;
+  --nm-info-soft: rgba(96, 165, 250, 0.12);
+
+  --nm-muted: #64748b;
+}
+
+/* ══════════════════════════════════════════
+   BASE
+   ══════════════════════════════════════════ */
+
+* { box-sizing: border-box; }
+
+:root {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 10% 10%, color-mix(in oklab, var(--color-brand-200) 55%, white) 0%, transparent 40%),
-    radial-gradient(circle at 88% 16%, color-mix(in oklab, var(--color-brand-50) 80%, white) 0%, transparent 44%),
-    linear-gradient(170deg, #f9fbfd 0%, #f3f8fb 42%, #f6fafb 100%);
+  background: var(--nm-bg);
+  color: var(--nm-text);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-#root {
-  min-height: 100vh;
+#root { min-height: 100vh; }
+
+img { display: block; max-width: 100%; }
+
+::selection {
+  background: var(--nm-accent-soft);
+  color: var(--nm-accent);
 }
 
-img {
-  display: block;
-  max-width: 100%;
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--nm-bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--nm-shadow-dark);
+  border-radius: 4px;
+}
+
+/* ══════════════════════════════════════════
+   NEUMORPHIC RAISED SURFACES
+   ══════════════════════════════════════════ */
+
+.nm-raised {
+  background: var(--nm-bg);
+  border: none;
+  border-radius: 1.5rem;
+  box-shadow: var(--nm-raised);
+}
+
+.nm-raised-sm {
+  background: var(--nm-bg);
+  border: none;
+  border-radius: 1rem;
+  box-shadow: var(--nm-raised-sm);
+}
+
+.nm-raised-lg {
+  background: var(--nm-bg);
+  border: none;
+  border-radius: 2rem;
+  box-shadow: var(--nm-raised-lg);
+}
+
+/* ══════════════════════════════════════════
+   NEUMORPHIC PRESSED / INSET
+   ══════════════════════════════════════════ */
+
+.nm-pressed {
+  background: var(--nm-bg);
+  border: none;
+  border-radius: 1rem;
+  box-shadow: var(--nm-pressed);
+}
+
+.nm-pressed-lg {
+  background: var(--nm-bg);
+  border: none;
+  border-radius: 1.25rem;
+  box-shadow: var(--nm-pressed-lg);
+}
+
+/* ══════════════════════════════════════════
+   NEUMORPHIC BUTTON
+   ──────────────────────────────────────────
+   Raised default → flatter on hover → inset on active
+   ══════════════════════════════════════════ */
+
+.nm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--nm-text);
+  background: var(--nm-bg);
+  border: none;
+  border-radius: 9999px;
+  box-shadow: var(--nm-raised-sm);
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow 0.2s ease, transform 0.15s ease, color 0.2s ease;
+  text-decoration: none;
+}
+
+.nm-btn:hover {
+  box-shadow: var(--nm-flat);
+}
+
+.nm-btn:active {
+  box-shadow: var(--nm-pressed);
+  transform: scale(0.97);
+}
+
+.nm-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Accent text */
+.nm-btn-accent { color: var(--nm-accent); }
+.nm-btn-accent:hover { color: var(--nm-accent-hover); }
+
+.nm-btn-success { color: var(--nm-success); }
+.nm-btn-danger { color: var(--nm-danger); }
+
+/* ══════════════════════════════════════════
+   NEUMORPHIC INPUT (always inset)
+   ══════════════════════════════════════════ */
+
+.nm-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--nm-text);
+  background: var(--nm-bg);
+  border: none;
+  border-radius: 1rem;
+  box-shadow: var(--nm-pressed);
+  outline: none;
+  resize: vertical;
+  transition: box-shadow 0.2s ease;
+}
+
+.nm-input::placeholder { color: var(--nm-text-tertiary); }
+
+.nm-input:focus {
+  box-shadow: var(--nm-pressed-lg);
+}
+
+/* ══════════════════════════════════════════
+   NEUMORPHIC PILL TOGGLE
+   ══════════════════════════════════════════ */
+
+.nm-pill {
+  padding: 0.45rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--nm-text-secondary);
+  background: var(--nm-bg);
+  border: none;
+  border-radius: 9999px;
+  box-shadow: var(--nm-flat);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  text-decoration: none;
+}
+
+.nm-pill:hover {
+  color: var(--nm-text);
+  box-shadow: var(--nm-raised-sm);
+}
+
+.nm-pill:active {
+  box-shadow: var(--nm-pressed);
+  transform: scale(0.97);
+}
+
+/* Active state: pressed into surface with accent color */
+.nm-pill[data-active="true"] {
+  color: var(--nm-accent);
+  box-shadow: var(--nm-pressed);
+}
+
+/* ══════════════════════════════════════════
+   NEUMORPHIC CARD (raised, with hover interaction)
+   ══════════════════════════════════════════ */
+
+.nm-card {
+  background: var(--nm-bg);
+  border: none;
+  border-radius: 1.25rem;
+  box-shadow: var(--nm-raised);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.nm-card:hover {
+  box-shadow: var(--nm-raised-sm);
+  transform: translateY(-2px);
+}
+
+/* Selected card: pressed + accent glow */
+.nm-card-selected {
+  box-shadow: var(--nm-pressed), 0 0 0 2px var(--nm-accent) !important;
+  transform: none !important;
+}
+
+/* ══════════════════════════════════════════
+   TYPOGRAPHY
+   ══════════════════════════════════════════ */
+
+.heading-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--nm-text);
+}
+
+.heading-section {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--nm-text);
+}
+
+/* ══════════════════════════════════════════
+   ANIMATIONS
+   ══════════════════════════════════════════ */
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-in {
+  animation: fade-in-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.stagger-1 { animation-delay: 0ms; }
+.stagger-2 { animation-delay: 60ms; }
+.stagger-3 { animation-delay: 120ms; }
+.stagger-4 { animation-delay: 180ms; }
+.stagger-5 { animation-delay: 240ms; }
+.stagger-6 { animation-delay: 300ms; }
+.stagger-7 { animation-delay: 360ms; }
+.stagger-8 { animation-delay: 420ms; }
+.stagger-9 { animation-delay: 480ms; }
+
+/* ══════════════════════════════════════════
+   STATUS DOT
+   ══════════════════════════════════════════ */
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  animation: glow-pulse 2s ease-in-out infinite;
 }

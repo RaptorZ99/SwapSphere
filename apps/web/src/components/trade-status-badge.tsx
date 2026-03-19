@@ -2,17 +2,23 @@ import { TradeStatus, type TradeStatus as TradeStatusType } from "@swapsphere/sh
 
 import { tradeStatusLabel } from "../lib/formatters";
 
-const statusStyles: Record<TradeStatusType, string> = {
-  [TradeStatus.PENDING]: "bg-amber-100 text-amber-900",
-  [TradeStatus.NEGOTIATION]: "bg-sky-100 text-sky-900",
-  [TradeStatus.ACCEPTED]: "bg-emerald-100 text-emerald-900",
-  [TradeStatus.REJECTED]: "bg-rose-100 text-rose-900",
-  [TradeStatus.CANCELED]: "bg-slate-200 text-slate-900"
+const statusConfig: Record<TradeStatusType, { colorVar: string; softVar: string }> = {
+  [TradeStatus.PENDING]: { colorVar: "--nm-warning", softVar: "--nm-warning-soft" },
+  [TradeStatus.NEGOTIATION]: { colorVar: "--nm-info", softVar: "--nm-info-soft" },
+  [TradeStatus.ACCEPTED]: { colorVar: "--nm-success", softVar: "--nm-success-soft" },
+  [TradeStatus.REJECTED]: { colorVar: "--nm-danger", softVar: "--nm-danger-soft" },
+  [TradeStatus.CANCELED]: { colorVar: "--nm-muted", softVar: "--nm-text-tertiary" }
 };
 
 export const TradeStatusBadge = ({ status }: { status: TradeStatusType }) => {
+  const c = statusConfig[status];
+
   return (
-    <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${statusStyles[status]}`}>
+    <span
+      className="nm-pressed inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold"
+      style={{ color: `var(${c.colorVar})` }}
+    >
+      <span className="status-dot" style={{ background: `var(${c.colorVar})` }} />
       {tradeStatusLabel[status]}
     </span>
   );

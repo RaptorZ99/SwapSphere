@@ -23,13 +23,9 @@ export const DashboardPage = () => {
   const [activeCategory, setActiveCategory] = useState<ItemCategory | "ALL">("ALL");
 
   const loadMyItems = async (): Promise<void> => {
-    if (!selectedUser) {
-      return;
-    }
-
+    if (!selectedUser) return;
     setLoading(true);
     setErrorMessage(null);
-
     try {
       const category = activeCategory === "ALL" ? undefined : activeCategory;
       const response = await apiClient.getMyItems(selectedUser.id, category);
@@ -45,68 +41,49 @@ export const DashboardPage = () => {
     }
   };
 
-  useEffect(() => {
-    void loadMyItems();
-  }, [selectedUser, activeCategory]);
+  useEffect(() => { void loadMyItems(); }, [selectedUser, activeCategory]);
 
   const otherUsers = useMemo(() => {
-    if (!selectedUser) {
-      return [];
-    }
-
-    return users.filter((user) => user.id !== selectedUser.id);
+    if (!selectedUser) return [];
+    return users.filter((u) => u.id !== selectedUser.id);
   }, [selectedUser, users]);
 
-  if (loadingUsers) {
-    return <StateBlock title="Chargement" message="Recuperation de la session..." />;
-  }
-
-  if (!selectedUser) {
-    return <Navigate to="/select-user" replace />;
-  }
+  if (loadingUsers) return <StateBlock title="Chargement" message="Recuperation de la session..." />;
+  if (!selectedUser) return <Navigate to="/select-user" replace />;
 
   return (
     <main className="space-y-8">
-      <section className="rounded-3xl border border-black/10 bg-white/85 p-6 shadow-sm backdrop-blur sm:p-8">
-        <h1 className="mt-2 text-3xl font-bold tracking-tight">Bonjour {selectedUser.displayName}</h1>
-        <p className="mt-3 max-w-3xl text-sm text-black/70">
-          Consulte ton inventaire, explore les collections des autres collectionneurs et demarre une proposition
-          d'echange.
+      {/* Hero */}
+      <section className="nm-raised-lg p-8 animate-in">
+        <p className="mb-1 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--nm-accent)" }}>
+          Tableau de bord
+        </p>
+        <h1 className="heading-display text-3xl sm:text-4xl">Bonjour {selectedUser.displayName}</h1>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed" style={{ color: "var(--nm-text-secondary)" }}>
+          Consulte ton inventaire, explore les collections des autres et demarre un echange.
         </p>
 
-        <div className="mt-5 flex flex-wrap gap-2">
-          {categoryOptions.map((option) => (
+        {/* Category pills */}
+        <div className="mt-6 flex flex-wrap gap-2">
+          {categoryOptions.map((opt) => (
             <button
-              key={option.value}
+              key={opt.value}
               type="button"
-              onClick={() => {
-                setActiveCategory(option.value);
-              }}
-              className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
-                activeCategory === option.value
-                  ? "bg-black text-white"
-                  : "bg-black/5 text-black hover:bg-black/10"
-              }`}
+              onClick={() => { setActiveCategory(opt.value); }}
+              className="nm-pill"
+              data-active={activeCategory === opt.value}
             >
-              {option.label}
+              {opt.label}
             </button>
           ))}
         </div>
       </section>
 
+      {/* Items grid */}
       {loading ? <StateBlock title="Chargement" message="Recuperation de ton inventaire..." /> : null}
 
       {!loading && errorMessage ? (
-        <StateBlock
-          title="Erreur"
-          message={errorMessage}
-          action={{
-            label: "Recharger",
-            onClick: () => {
-              void loadMyItems();
-            }
-          }}
-        />
+        <StateBlock title="Erreur" message={errorMessage} action={{ label: "Recharger", onClick: () => { void loadMyItems(); } }} />
       ) : null}
 
       {!loading && !errorMessage && items.length === 0 ? (
@@ -114,37 +91,50 @@ export const DashboardPage = () => {
       ) : null}
 
       {!loading && !errorMessage && items.length > 0 ? (
-        <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <ItemCard key={item.id} item={item} />
+        <section className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((item, i) => (
+            <div key={item.id} className={`animate-in stagger-${Math.min(i + 1, 9)}`}>
+              <ItemCard item={item} />
+            </div>
           ))}
         </section>
       ) : null}
 
-      <section className="rounded-3xl border border-black/10 bg-white/85 p-6 shadow-sm backdrop-blur">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Collectionneurs disponibles</h2>
-          <Link to="/trades/inbox" className="rounded-full bg-black px-4 py-2 text-xs font-semibold text-white">
-            Voir mes trocs
+      {/* Collectors */}
+      <section className="nm-raised-lg p-6 animate-in sm:p-8">
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <p className="mb-1 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--nm-accent)" }}>
+              Communaute
+            </p>
+            <h2 className="heading-section text-xl">Collectionneurs</h2>
+          </div>
+          <Link to="/trades/inbox" className="nm-btn nm-btn-accent px-4 py-2 text-xs">
+            Mes trocs
           </Link>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2">
-          {otherUsers.map((user) => (
-            <article key={user.id} className="rounded-2xl border border-black/10 bg-white p-4">
-              <h3 className="text-base font-semibold">{user.displayName}</h3>
-              <p className="text-xs text-black/60">Partenaire d'echange</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <Link
-                  to={`/users/${user.id}/items`}
-                  className="rounded-full bg-black/5 px-3 py-2 text-xs font-semibold text-black hover:bg-black/10"
+        <div className="grid gap-4 sm:grid-cols-2">
+          {otherUsers.map((user, i) => (
+            <article key={user.id} className={`nm-pressed p-5 animate-in stagger-${Math.min(i + 3, 9)}`}>
+              <div className="flex items-center gap-3">
+                <div
+                  className="nm-raised-sm flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold"
+                  style={{ color: "var(--nm-accent)" }}
                 >
+                  {user.displayName.slice(0, 1).toUpperCase()}
+                </div>
+                <div>
+                  <h3 className="heading-section text-base">{user.displayName}</h3>
+                  <p className="text-xs" style={{ color: "var(--nm-text-tertiary)" }}>Partenaire d'echange</p>
+                </div>
+              </div>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                <Link to={`/users/${user.id}/items`} className="nm-btn px-3 py-1.5 text-xs">
                   Voir ses objets
                 </Link>
-                <Link
-                  to={`/trades/new/${user.id}`}
-                  className="rounded-full bg-[var(--color-brand-500)] px-3 py-2 text-xs font-semibold text-white"
-                >
+                <Link to={`/trades/new/${user.id}`} className="nm-btn nm-btn-accent px-3 py-1.5 text-xs">
                   Proposer un troc
                 </Link>
               </div>

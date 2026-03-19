@@ -18,24 +18,18 @@ export const UserItemsPage = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [category, setCategory] = useState<ItemCategory | "ALL">("ALL");
 
-  const targetUser = users.find((user) => user.id === userId) ?? null;
+  const targetUser = users.find((u) => u.id === userId) ?? null;
 
   const loadItems = async (): Promise<void> => {
-    if (!selectedUser || !userId) {
-      return;
-    }
-
+    if (!selectedUser || !userId) return;
     setLoading(true);
     setErrorMessage(null);
-
     try {
-      const categoryFilter = category === "ALL" ? undefined : category;
-
+      const f = category === "ALL" ? undefined : category;
       const [mine, target] = await Promise.all([
-        apiClient.getMyItems(selectedUser.id, categoryFilter),
-        apiClient.getUserItems(userId, selectedUser.id, categoryFilter)
+        apiClient.getMyItems(selectedUser.id, f),
+        apiClient.getUserItems(userId, selectedUser.id, f)
       ]);
-
       setMyItems(mine);
       setTargetItems(target);
     } catch (error: unknown) {
@@ -49,93 +43,51 @@ export const UserItemsPage = () => {
     }
   };
 
-  useEffect(() => {
-    void loadItems();
-  }, [selectedUser, userId, category]);
+  useEffect(() => { void loadItems(); }, [selectedUser, userId, category]);
 
-  const categoryButtons = useMemo(
-    () => ["ALL", ItemCategory.CARD, ItemCategory.ACCESSORY, ItemCategory.PACK] as const,
-    []
-  );
+  const cats = useMemo(() => ["ALL", ItemCategory.CARD, ItemCategory.ACCESSORY, ItemCategory.PACK] as const, []);
 
-  if (loadingUsers) {
-    return <StateBlock title="Chargement" message="Recuperation de la session..." />;
-  }
-
-  if (!selectedUser) {
-    return <Navigate to="/select-user" replace />;
-  }
-
-  if (!userId || !targetUser) {
-    return <StateBlock title="Utilisateur introuvable" message="Ce profil n'existe pas ou n'est plus disponible." />;
-  }
+  if (loadingUsers) return <StateBlock title="Chargement" message="Recuperation de la session..." />;
+  if (!selectedUser) return <Navigate to="/select-user" replace />;
+  if (!userId || !targetUser) return <StateBlock title="Utilisateur introuvable" message="Ce profil n'existe pas." />;
 
   return (
     <main className="space-y-6">
-      <section className="rounded-3xl border border-black/10 bg-white/85 p-6 shadow-sm backdrop-blur">
-        <h1 className="mt-2 text-2xl font-bold tracking-tight">Inventaires compares</h1>
-        <p className="mt-2 text-sm text-black/70">
-          Compare ton inventaire avec celui de <strong>{targetUser.displayName}</strong> pour preparer une proposition.
+      <section className="nm-raised-lg p-6 animate-in sm:p-8">
+        <p className="mb-1 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--nm-accent)" }}>Comparaison</p>
+        <h1 className="heading-display text-2xl sm:text-3xl">Inventaires compares</h1>
+        <p className="mt-2 text-sm" style={{ color: "var(--nm-text-secondary)" }}>
+          Compare ton inventaire avec celui de <strong>{targetUser.displayName}</strong>.
         </p>
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          {categoryButtons.map((value) => (
-            <button
-              key={value}
-              type="button"
-              onClick={() => {
-                setCategory(value);
-              }}
-              className={`rounded-full px-4 py-2 text-xs font-semibold ${
-                category === value ? "bg-black text-white" : "bg-black/5"
-              }`}
-            >
-              {value === "ALL" ? "Tous" : value}
+        <div className="mt-5 flex flex-wrap items-center gap-2">
+          {cats.map((v) => (
+            <button key={v} type="button" onClick={() => { setCategory(v); }} className="nm-pill" data-active={category === v}>
+              {v === "ALL" ? "Tous" : v}
             </button>
           ))}
-
-          <Link
-            to={`/trades/new/${targetUser.id}`}
-            className="ml-auto rounded-full bg-[var(--color-brand-500)] px-4 py-2 text-xs font-semibold text-white"
-          >
+          <Link to={`/trades/new/${targetUser.id}`} className="nm-btn nm-btn-accent ml-auto px-4 py-2 text-xs">
             Demarrer un troc
           </Link>
         </div>
       </section>
 
       {loading ? <StateBlock title="Chargement" message="Recuperation des objets..." /> : null}
-      {!loading && errorMessage ? (
-        <StateBlock
-          title="Erreur"
-          message={errorMessage}
-          action={{
-            label: "Recharger",
-            onClick: () => {
-              void loadItems();
-            }
-          }}
-        />
-      ) : null}
+      {!loading && errorMessage ? <StateBlock title="Erreur" message={errorMessage} action={{ label: "Recharger", onClick: () => { void loadItems(); } }} /> : null}
 
       {!loading && !errorMessage ? (
         <section className="grid gap-6 lg:grid-cols-2">
-          <section className="space-y-4 rounded-3xl border border-black/10 bg-white/85 p-5 shadow-sm backdrop-blur">
-            <h2 className="text-lg font-semibold">Tes objets ({myItems.length})</h2>
-            {myItems.length === 0 ? <p className="text-sm text-black/60">Aucun objet dans cette categorie.</p> : null}
-            <div className="grid gap-3 sm:grid-cols-2">
-              {myItems.map((item) => (
-                <ItemCard key={item.id} item={item} />
-              ))}
+          <section className="nm-raised p-5 animate-in stagger-2">
+            <h2 className="heading-section text-lg">Tes objets <span className="text-sm" style={{ color: "var(--nm-text-tertiary)" }}>({myItems.length})</span></h2>
+            {myItems.length === 0 ? <p className="mt-3 text-sm" style={{ color: "var(--nm-text-tertiary)" }}>Aucun objet.</p> : null}
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              {myItems.map((item) => <ItemCard key={item.id} item={item} />)}
             </div>
           </section>
-
-          <section className="space-y-4 rounded-3xl border border-black/10 bg-white/85 p-5 shadow-sm backdrop-blur">
-            <h2 className="text-lg font-semibold">Objets de {targetUser.displayName} ({targetItems.length})</h2>
-            {targetItems.length === 0 ? <p className="text-sm text-black/60">Aucun objet dans cette categorie.</p> : null}
-            <div className="grid gap-3 sm:grid-cols-2">
-              {targetItems.map((item) => (
-                <ItemCard key={item.id} item={item} />
-              ))}
+          <section className="nm-raised p-5 animate-in stagger-3">
+            <h2 className="heading-section text-lg">Objets de {targetUser.displayName} <span className="text-sm" style={{ color: "var(--nm-text-tertiary)" }}>({targetItems.length})</span></h2>
+            {targetItems.length === 0 ? <p className="mt-3 text-sm" style={{ color: "var(--nm-text-tertiary)" }}>Aucun objet.</p> : null}
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              {targetItems.map((item) => <ItemCard key={item.id} item={item} />)}
             </div>
           </section>
         </section>
