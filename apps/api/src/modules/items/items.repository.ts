@@ -1,4 +1,4 @@
-import type { ItemCategory, ItemSummary, UserSummary } from "@swapsphere/shared-types";
+import type { ItemCategory, ItemSummary, UserSummary } from "@swapsphere/shared";
 
 import { prisma } from "../../lib/prisma.js";
 

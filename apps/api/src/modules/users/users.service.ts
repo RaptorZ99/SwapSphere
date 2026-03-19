@@ -1,4 +1,4 @@
-import type { SelectUserResponse, UserSummary } from "@swapsphere/shared-types";
+import type { SelectUserResponse, UserSummary } from "@swapsphere/shared";
 
 import { AppError } from "../../lib/app-error.js";
 import type { UsersRepository } from "./users.repository.js";

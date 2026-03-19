@@ -1,4 +1,4 @@
-import type { TradeCreateInput, TradeMessageCreateInput } from "@swapsphere/shared-types";
+import type { TradeCreateInput, TradeMessageCreateInput } from "@swapsphere/shared";
 import type { Request, Response } from "express";
 
 import { sendSuccess } from "../../lib/http-response.js";

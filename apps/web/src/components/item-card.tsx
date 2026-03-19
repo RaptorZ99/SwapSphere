@@ -1,4 +1,4 @@
-import type { ItemSummary } from "@swapsphere/shared-types";
+import type { ItemSummary } from "@swapsphere/shared";
 
 type ItemCardProps = {
   item: ItemSummary;

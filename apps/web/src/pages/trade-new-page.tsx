@@ -1,4 +1,4 @@
-import type { ItemSummary } from "@swapsphere/shared-types";
+import type { ItemSummary } from "@swapsphere/shared";
 import { useEffect, useMemo, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 

@@ -1,5 +1,5 @@
 {
-  "extends": "@swapsphere/config-typescript/node.json",
+  "extends": "../../tsconfig.node.json",
   "compilerOptions": {
     "rootDir": "src"
   },

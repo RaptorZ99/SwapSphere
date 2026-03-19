@@ -1,4 +1,4 @@
-import { TradeStatus, type TradeStatus as TradeStatusType } from "@swapsphere/shared-types";
+import { TradeStatus, type TradeStatus as TradeStatusType } from "@swapsphere/shared";
 
 import { tradeStatusLabel } from "../lib/formatters";
 

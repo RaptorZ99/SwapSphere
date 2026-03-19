@@ -1,5 +1,5 @@
 {
-  "name": "@swapsphere/shared-types",
+  "name": "@swapsphere/shared",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -17,8 +17,6 @@
     "lint": "eslint \"src/**/*.ts\""
   },
   "devDependencies": {
-    "@swapsphere/config-eslint": "workspace:*",
-    "@swapsphere/config-typescript": "workspace:*",
     "@types/node": "^24.10.0",
     "eslint": "10.0.2",
     "typescript": "5.9.3"

@@ -4,7 +4,7 @@ import {
   TradeStatus,
   type ItemCategory,
   type UserSummary
-} from "@swapsphere/shared-types";
+} from "@swapsphere/shared";
 
 import { prisma } from "../../lib/prisma.js";
 

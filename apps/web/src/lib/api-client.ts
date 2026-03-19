@@ -12,7 +12,7 @@ import type {
   TradeMessageCreateInput,
   TradeMessageCreateResponse,
   UserSummary
-} from "@swapsphere/shared-types";
+} from "@swapsphere/shared";
 
 import { clientEnv } from "./env";
 

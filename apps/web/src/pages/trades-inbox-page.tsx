@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { TradeStatus, type TradeInboxSummary } from "@swapsphere/shared-types";
+import { TradeStatus, type TradeInboxSummary } from "@swapsphere/shared";
 
 import { StateBlock } from "../components/state-block";
 import { TradeStatusBadge } from "../components/trade-status-badge";

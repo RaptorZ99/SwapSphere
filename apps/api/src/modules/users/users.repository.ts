@@ -1,4 +1,4 @@
-import type { UserSummary } from "@swapsphere/shared-types";
+import type { UserSummary } from "@swapsphere/shared";
 
 import { prisma } from "../../lib/prisma.js";
 

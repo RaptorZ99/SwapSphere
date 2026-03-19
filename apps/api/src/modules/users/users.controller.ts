@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { SelectUserInput } from "@swapsphere/shared-types";
+import type { SelectUserInput } from "@swapsphere/shared";
 
 import { sendSuccess } from "../../lib/http-response.js";
 import { getValidatedPayload } from "../../lib/validation.js";

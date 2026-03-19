@@ -1,4 +1,4 @@
-import { TradeStatus } from "@swapsphere/shared-types";
+import { TradeStatus } from "@swapsphere/shared";
 
 export const formatDateTime = (isoDate: string): string => {
   return new Intl.DateTimeFormat("fr-FR", {

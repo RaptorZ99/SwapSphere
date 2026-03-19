@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import type { UserSummary } from "@swapsphere/shared-types";
+import type { UserSummary } from "@swapsphere/shared";
 
 import { apiClient, ApiClientError } from "../../lib/api-client";
 import { getErrorMessage } from "../../lib/error-messages";

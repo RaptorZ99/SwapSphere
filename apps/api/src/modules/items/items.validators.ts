@@ -1,4 +1,4 @@
-import { ItemCategory } from "@swapsphere/shared-types";
+import { ItemCategory } from "@swapsphere/shared";
 import { z } from "zod";
 
 const categorySchema = z.nativeEnum(ItemCategory).optional();

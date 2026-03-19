@@ -1,5 +1,5 @@
 {
-  "extends": "@swapsphere/config-typescript/react.json",
+  "extends": "../../tsconfig.react.json",
   "compilerOptions": {
     "module": "ESNext",
     "moduleResolution": "Bundler",

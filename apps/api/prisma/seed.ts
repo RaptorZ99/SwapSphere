@@ -1,5 +1,5 @@
 import { PrismaPg } from "@prisma/adapter-pg";
-import { ItemCategory, TradeMessageType, TradeSide, TradeStatus } from "@swapsphere/shared-types";
+import { ItemCategory, TradeMessageType, TradeSide, TradeStatus } from "@swapsphere/shared";
 
 import { env } from "../src/config/env.js";
 import { PrismaClient } from "../src/generated/prisma/client.js";

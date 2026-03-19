@@ -1,4 +1,4 @@
-import type { ApiErrorCode } from "@swapsphere/shared-types";
+import type { ApiErrorCode } from "@swapsphere/shared";
 
 export class AppError extends Error {
   public readonly status: number;

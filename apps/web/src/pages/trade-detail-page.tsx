@@ -1,5 +1,4 @@
-import { TradeStatus, type TradeDetail } from "@swapsphere/shared-types";
-import { isTerminalTradeStatus } from "@swapsphere/shared-utils";
+import { TradeStatus, isTerminalTradeStatus, type TradeDetail } from "@swapsphere/shared";
 import { useEffect, useMemo, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 

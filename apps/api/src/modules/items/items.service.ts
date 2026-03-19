@@ -1,4 +1,4 @@
-import type { ItemCategory, ItemSummary } from "@swapsphere/shared-types";
+import type { ItemCategory, ItemSummary } from "@swapsphere/shared";
 
 import { AppError } from "../../lib/app-error.js";
 import type { ItemsRepository } from "./items.repository.js";

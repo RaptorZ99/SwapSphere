@@ -2,6 +2,8 @@ import {
   TradeMessageType,
   TradeSide,
   TradeStatus,
+  isTerminalTradeStatus,
+  sortMessagesByCreatedAtAsc,
   type TradeSide as TradeSideType,
   type TradeActionResponse,
   type TradeCreateInput,
@@ -10,8 +12,7 @@ import {
   type TradeInboxSummary,
   type TradeMessageCreateResponse,
   type TradeMessageSummary
-} from "@swapsphere/shared-types";
-import { isTerminalTradeStatus, sortMessagesByCreatedAtAsc } from "@swapsphere/shared-utils";
+} from "@swapsphere/shared";
 
 import { AppError } from "../../lib/app-error.js";
 import type { TradesRepository } from "./trades.repository.js";

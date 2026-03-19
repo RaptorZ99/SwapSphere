@@ -1,4 +1,4 @@
-import type { ItemCategory } from "@swapsphere/shared-types";
+import type { ItemCategory } from "@swapsphere/shared";
 import type { Request, Response } from "express";
 
 import { sendSuccess } from "../../lib/http-response.js";
